@@ -1,0 +1,39 @@
+{
+  "expectations": [
+    {
+      "text": "Despite casual/implicit phrasing, a properly formatted handoff document was still produced",
+      "passed": true,
+      "evidence": "Full handoff at .claude/handoffs/eval2-with/2026-07-13_0400_token-bucket-rate-limiter.md, structurally identical rigor to eval 1."
+    },
+    {
+      "text": "Handoff file under .claude/handoffs/<repo>/ with timestamped filename",
+      "passed": true,
+      "evidence": "Confirmed path and filename pattern match."
+    },
+    {
+      "text": "Contains all required headings",
+      "passed": true,
+      "evidence": "All 7 headings present, same structure as eval 1."
+    },
+    {
+      "text": ".gitignore created containing '.claude/handoffs/'",
+      "passed": true,
+      "evidence": ".gitignore output present with correct entry."
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 0,
+    "total": 4,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "total_tool_calls": 12,
+    "output_chars": null,
+    "transcript_chars": null
+  },
+  "timing": {
+    "executor_duration_seconds": 43.0,
+    "total_duration_seconds": 43.0
+  }
+}

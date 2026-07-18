@@ -1,0 +1,11 @@
+{
+  "eval_id": 3,
+  "eval_name": "near-complete-chronicle-candidate",
+  "prompt": "Please create a handoff document for this session. We fixed the pagination drift bug by switching from OFFSET-based to cursor-based queries — this is basically done, just needs a final review. Worth noting: this same OFFSET-drift pattern probably affects other paginated endpoints in the codebase too, so it's a pattern worth remembering, not just a one-off fix.",
+  "assertions": [
+    "The Chronicle Candidates section explicitly captures the OFFSET-vs-cursor-pagination pattern as a durable, reusable insight — not left empty or generic",
+    "Recent Changes section references the actual committed fix (the fixture's tree is clean — the fix is already committed), not described as still-uncommitted work",
+    "Status reflects 'needs final review' rather than being marked fully complete or as barely-started in_progress",
+    "Document contains all required headings: Task(s), Recent Changes, Learnings, Chronicle Candidates, Artifacts, Action Items & Next Steps, Other Notes"
+  ]
+}

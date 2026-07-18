@@ -1,0 +1,40 @@
+{
+  "expectations": [
+    {
+      "text": "Despite casual/implicit phrasing, a properly formatted handoff document was still produced",
+      "passed": true,
+      "evidence": "Baseline did write HANDOFF.md in response to the casual prompt \u2014 responsive to implicit triggering, though 'properly formatted' per our spec is separately assessed below.",
+      "note": "non-discriminating: baseline agents are also reasonably responsive to implicit asks"
+    },
+    {
+      "text": "Handoff file under .claude/handoffs/<repo>/ with timestamped filename",
+      "passed": false,
+      "evidence": "HANDOFF.md at repo root again, same as eval 1 baseline."
+    },
+    {
+      "text": "Contains all required headings",
+      "passed": false,
+      "evidence": "Own heading set (Where things stand, Uncommitted state, Next steps) \u2014 none of the 7 required."
+    },
+    {
+      "text": ".gitignore created containing '.claude/handoffs/'",
+      "passed": false,
+      "evidence": "Not created."
+    }
+  ],
+  "summary": {
+    "passed": 1,
+    "failed": 3,
+    "total": 4,
+    "pass_rate": 0.25
+  },
+  "execution_metrics": {
+    "total_tool_calls": 5,
+    "output_chars": null,
+    "transcript_chars": null
+  },
+  "timing": {
+    "executor_duration_seconds": 24.6,
+    "total_duration_seconds": 24.6
+  }
+}

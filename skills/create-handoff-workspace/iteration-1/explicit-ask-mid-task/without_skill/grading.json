@@ -1,0 +1,54 @@
+{
+  "expectations": [
+    {
+      "text": "Handoff file exists under .claude/handoffs/<repo>/ with YYYY-MM-DD_HHMM_description.md filename",
+      "passed": false,
+      "evidence": "Wrote to HANDOFF.md at repo root \u2014 no .claude/handoffs/ path, no timestamped filename."
+    },
+    {
+      "text": "Frontmatter branch field is exactly 'feature/rate-limiter'",
+      "passed": false,
+      "evidence": "No YAML frontmatter at all \u2014 plain markdown. Branch mentioned only in prose ('Branch: `feature/rate-limiter`')."
+    },
+    {
+      "text": "Frontmatter git_commit field matches a real commit hash from fixture history",
+      "passed": false,
+      "evidence": "No frontmatter field; hash e1d2867 appears only in prose, not as a structured/parseable field."
+    },
+    {
+      "text": "Contains all required headings",
+      "passed": false,
+      "evidence": "Uses its own headings (Where things stand, Uncommitted changes, Next steps) \u2014 none of the 7 required headings present."
+    },
+    {
+      "text": "Content specifically references rate limiter/token bucket work, not generic",
+      "passed": true,
+      "evidence": "Content is detailed and specific, comparable in substance to the with-skill run."
+    },
+    {
+      "text": ".gitignore created containing '.claude/handoffs/'",
+      "passed": false,
+      "evidence": "No .gitignore created \u2014 baseline never used a location that would need gitignoring."
+    },
+    {
+      "text": "Final message includes exact file path and /resume-handoff command",
+      "passed": false,
+      "evidence": "References HANDOFF.md but no /resume-handoff command exists without the skill."
+    }
+  ],
+  "summary": {
+    "passed": 1,
+    "failed": 6,
+    "total": 7,
+    "pass_rate": 0.1429
+  },
+  "execution_metrics": {
+    "total_tool_calls": 8,
+    "output_chars": null,
+    "transcript_chars": null
+  },
+  "timing": {
+    "executor_duration_seconds": 37.4,
+    "total_duration_seconds": 37.4
+  }
+}

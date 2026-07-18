@@ -1,0 +1,328 @@
+{
+  "metadata": {
+    "skill_name": "create-handoff",
+    "skill_path": "/Users/heman/developer/AI/skills/create-handoff",
+    "timestamp": "2026-07-12T20:05:51.198736+00:00",
+    "evals_run": [
+      "explicit-ask-mid-task",
+      "casual-implicit-trigger",
+      "near-complete-chronicle-candidate"
+    ],
+    "runs_per_configuration": 1
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "eval_name": "explicit-ask-mid-task",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 39.0,
+        "tokens": null,
+        "tool_calls": 10,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Handoff file exists under .claude/handoffs/<repo>/ with YYYY-MM-DD_HHMM_description.md filename",
+          "passed": true,
+          "evidence": ".claude/handoffs/eval1-with/2026-07-13_0359_rate-limiter-token-bucket.md \u2014 matches pattern exactly."
+        },
+        {
+          "text": "Frontmatter branch field is exactly 'feature/rate-limiter'",
+          "passed": true,
+          "evidence": "branch: feature/rate-limiter in frontmatter."
+        },
+        {
+          "text": "Frontmatter git_commit field matches a real commit hash from fixture history",
+          "passed": true,
+          "evidence": "git_commit: e1d2867 \u2014 verified against actual fixture: `git log --oneline` shows e1d2867 wip: add token bucket skeleton as the real second commit."
+        },
+        {
+          "text": "Contains all required headings",
+          "passed": true,
+          "evidence": "Task(s), Recent Changes, Learnings, Chronicle Candidates, Artifacts, Action Items & Next Steps, Other Notes \u2014 all seven present."
+        },
+        {
+          "text": "Content specifically references rate limiter/token bucket work, not generic",
+          "passed": true,
+          "evidence": "References exact line numbers (rate_limiter.py:8-10), exact method names (_refill, allow), exact TODO comments."
+        },
+        {
+          "text": ".gitignore created containing '.claude/handoffs/'",
+          "passed": true,
+          "evidence": ".gitignore output file contains exactly '.claude/handoffs/'; fixture had no .gitignore before."
+        },
+        {
+          "text": "Final message includes exact file path and /resume-handoff command",
+          "passed": true,
+          "evidence": "FINAL_RESPONSE.md: 'Handoff created: .claude/handoffs/eval1-with/...' + '/resume-handoff .claude/handoffs/eval1-with/...'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "explicit-ask-mid-task",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.1429,
+        "passed": 1,
+        "failed": 6,
+        "total": 7,
+        "time_seconds": 37.4,
+        "tokens": null,
+        "tool_calls": 8,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Handoff file exists under .claude/handoffs/<repo>/ with YYYY-MM-DD_HHMM_description.md filename",
+          "passed": false,
+          "evidence": "Wrote to HANDOFF.md at repo root \u2014 no .claude/handoffs/ path, no timestamped filename."
+        },
+        {
+          "text": "Frontmatter branch field is exactly 'feature/rate-limiter'",
+          "passed": false,
+          "evidence": "No YAML frontmatter at all \u2014 plain markdown. Branch mentioned only in prose ('Branch: `feature/rate-limiter`')."
+        },
+        {
+          "text": "Frontmatter git_commit field matches a real commit hash from fixture history",
+          "passed": false,
+          "evidence": "No frontmatter field; hash e1d2867 appears only in prose, not as a structured/parseable field."
+        },
+        {
+          "text": "Contains all required headings",
+          "passed": false,
+          "evidence": "Uses its own headings (Where things stand, Uncommitted changes, Next steps) \u2014 none of the 7 required headings present."
+        },
+        {
+          "text": "Content specifically references rate limiter/token bucket work, not generic",
+          "passed": true,
+          "evidence": "Content is detailed and specific, comparable in substance to the with-skill run."
+        },
+        {
+          "text": ".gitignore created containing '.claude/handoffs/'",
+          "passed": false,
+          "evidence": "No .gitignore created \u2014 baseline never used a location that would need gitignoring."
+        },
+        {
+          "text": "Final message includes exact file path and /resume-handoff command",
+          "passed": false,
+          "evidence": "References HANDOFF.md but no /resume-handoff command exists without the skill."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "casual-implicit-trigger",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 43.0,
+        "tokens": null,
+        "tool_calls": 12,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Despite casual/implicit phrasing, a properly formatted handoff document was still produced",
+          "passed": true,
+          "evidence": "Full handoff at .claude/handoffs/eval2-with/2026-07-13_0400_token-bucket-rate-limiter.md, structurally identical rigor to eval 1."
+        },
+        {
+          "text": "Handoff file under .claude/handoffs/<repo>/ with timestamped filename",
+          "passed": true,
+          "evidence": "Confirmed path and filename pattern match."
+        },
+        {
+          "text": "Contains all required headings",
+          "passed": true,
+          "evidence": "All 7 headings present, same structure as eval 1."
+        },
+        {
+          "text": ".gitignore created containing '.claude/handoffs/'",
+          "passed": true,
+          "evidence": ".gitignore output present with correct entry."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "casual-implicit-trigger",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.25,
+        "passed": 1,
+        "failed": 3,
+        "total": 4,
+        "time_seconds": 24.6,
+        "tokens": null,
+        "tool_calls": 5,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Despite casual/implicit phrasing, a properly formatted handoff document was still produced",
+          "passed": true,
+          "evidence": "Baseline did write HANDOFF.md in response to the casual prompt \u2014 responsive to implicit triggering, though 'properly formatted' per our spec is separately assessed below.",
+          "note": "non-discriminating: baseline agents are also reasonably responsive to implicit asks"
+        },
+        {
+          "text": "Handoff file under .claude/handoffs/<repo>/ with timestamped filename",
+          "passed": false,
+          "evidence": "HANDOFF.md at repo root again, same as eval 1 baseline."
+        },
+        {
+          "text": "Contains all required headings",
+          "passed": false,
+          "evidence": "Own heading set (Where things stand, Uncommitted state, Next steps) \u2014 none of the 7 required."
+        },
+        {
+          "text": ".gitignore created containing '.claude/handoffs/'",
+          "passed": false,
+          "evidence": "Not created."
+        }
+      ],
+      "notes": [
+        "non-discriminating: baseline agents are also reasonably responsive to implicit asks"
+      ]
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "near-complete-chronicle-candidate",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 37.2,
+        "tokens": null,
+        "tool_calls": 9,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Chronicle Candidates section captures OFFSET-vs-cursor pattern as durable/reusable",
+          "passed": true,
+          "evidence": "'OFFSET-based pagination drifts when rows are inserted mid-list; cursor/keyset pagination... is the fix. This is a pattern, not a one-off.'"
+        },
+        {
+          "text": "Recent Changes reflects the fix as actually committed (clean tree), not uncommitted WIP",
+          "passed": true,
+          "evidence": "'See commit faa15c0 (fix: switch to cursor-based pagination) for the full diff' \u2014 correctly reflects committed state."
+        },
+        {
+          "text": "Status reflects needs-review nuance, not falsely complete or falsely barely-started",
+          "passed": true,
+          "evidence": "Task(s): 'done, pending final review'. Frontmatter status=in_progress is coarse but body text is precise.",
+          "note": "minor: frontmatter status enum (in_progress|complete) has no dedicated needs-review value \u2014 worth adding in next iteration"
+        },
+        {
+          "text": "Contains all required headings",
+          "passed": true,
+          "evidence": "All 7 present."
+        }
+      ],
+      "notes": [
+        "minor: frontmatter status enum (in_progress|complete) has no dedicated needs-review value \u2014 worth adding in next iteration"
+      ]
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "near-complete-chronicle-candidate",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "time_seconds": 48.3,
+        "tokens": null,
+        "tool_calls": 7,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Chronicle Candidates-equivalent pattern capture present and durable-framed",
+          "passed": true,
+          "evidence": "Baseline has its own '## Pattern worth remembering (not just a one-off fix)' section, arguably as well-written as the with-skill version.",
+          "note": "non-discriminating on this eval: prompt was explicit enough that baseline matched content quality"
+        },
+        {
+          "text": "Recent Changes reflects the fix as actually committed, not uncommitted WIP",
+          "passed": true,
+          "evidence": "'Fix is implemented and committed. Considered basically done.' correctly references faa15c0."
+        },
+        {
+          "text": "Status reflects needs-review nuance",
+          "passed": true,
+          "evidence": "'**Status:** Code complete, needs final review before merge' \u2014 actually more explicit than the with-skill run's frontmatter enum."
+        },
+        {
+          "text": "Contains all required headings",
+          "passed": false,
+          "evidence": "Own headings (Summary, What changed, State/what's left, Pattern worth remembering, Suggested next steps) \u2014 none of the 7 required."
+        }
+      ],
+      "notes": [
+        "non-discriminating on this eval: prompt was explicit enough that baseline matched content quality"
+      ]
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 39.7333,
+        "stddev": 2.9687,
+        "min": 37.2,
+        "max": 43.0
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.381,
+        "stddev": 0.324,
+        "min": 0.1429,
+        "max": 0.75
+      },
+      "time_seconds": {
+        "mean": 36.7667,
+        "stddev": 11.8627,
+        "min": 24.6,
+        "max": 48.3
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.62",
+      "time_seconds": "+3.0"
+    }
+  },
+  "notes": [
+    "Strong discrimination across all 3 evals: with_skill 15/15 vs without_skill 5/15.",
+    "Baseline's biggest structural gaps: no .claude/handoffs/ location, no YAML frontmatter, no matching headings, no .gitignore management.",
+    "Eval 3 (near-complete-chronicle-candidate) is the weakest discriminator of the three (4/4 vs 3/4) \u2014 a sufficiently detailed prompt let the baseline produce comparable CONTENT quality; the skill's remaining edge there is structural consistency (fixed headings, machine-parseable frontmatter) rather than content quality.",
+    "Frontmatter status enum (in_progress|complete) may be too coarse \u2014 eval 3's with_skill run needed body text to convey 'needs review', while baseline's freeform format expressed it more directly. Consider adding a needs_review status value in the next iteration."
+  ]
+}

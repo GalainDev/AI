@@ -1,0 +1,44 @@
+{
+  "skill_name": "create-handoff",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I need to step away from this for a while — can you write up a handoff so I can pick this back up later? We've been working on the rate limiter and I haven't finished the tests yet.",
+      "expected_output": "A handoff markdown file at .claude/handoffs/rate-limiter-repo/<timestamp>_<description>.md with frontmatter matching the actual git commit/branch, all sections filled honestly (including the uncommitted rate_limiter_test.py stub and in-progress _refill method), and a new .gitignore entry for .claude/handoffs/ since none existed before.",
+      "files": ["evals/fixtures/rate-limiter-repo"],
+      "expectations": [
+        "A handoff markdown file exists under a .claude/handoffs/<repo>/ path with a YYYY-MM-DD_HHMM_description.md-shaped filename",
+        "Frontmatter branch field is exactly 'feature/rate-limiter'",
+        "Frontmatter git_commit field matches a real commit hash from this fixture's history (not invented)",
+        "Document contains all required headings: Task(s), Recent Changes, Learnings, Chronicle Candidates, Artifacts, Action Items & Next Steps, Other Notes",
+        "Content specifically references the rate limiter / token bucket work, not generic placeholder text",
+        "A .gitignore file was created containing '.claude/handoffs/' since none existed in the fixture before",
+        "The final message to the user includes the exact created file path and the /resume-handoff command to resume it"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "gonna hop off for lunch, can you jot down where we left off with the rate limiter so I don't lose context",
+      "expected_output": "Same mid-task repo, casual/implicit phrasing (no explicit 'handoff' or 'resume' wording) still triggers the skill and produces a correctly formatted handoff document.",
+      "files": ["evals/fixtures/rate-limiter-repo"],
+      "expectations": [
+        "Despite no explicit 'handoff' keyword in the prompt, a properly formatted handoff document was still produced (not a generic freeform note)",
+        "A handoff markdown file exists under a .claude/handoffs/<repo>/ path with a YYYY-MM-DD_HHMM_description.md-shaped filename",
+        "Document contains all required headings: Task(s), Recent Changes, Learnings, Chronicle Candidates, Artifacts, Action Items & Next Steps, Other Notes",
+        "A .gitignore file was created containing '.claude/handoffs/'"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Please create a handoff document for this session. We fixed the pagination drift bug by switching from OFFSET-based to cursor-based queries — this is basically done, just needs a final review. Worth noting: this same OFFSET-drift pattern probably affects other paginated endpoints in the codebase too, so it's a pattern worth remembering, not just a one-off fix.",
+      "expected_output": "Handoff reflects the near-complete/needs-review status accurately (not falsely 'in_progress' with unfinished-sounding language, not falsely fully 'complete' either — final review is still pending), and the Chronicle Candidates section actually captures the OFFSET-vs-cursor pattern as durable/reusable, since the prompt explicitly flags it as such.",
+      "files": ["evals/fixtures/pagination-repo"],
+      "expectations": [
+        "The Chronicle Candidates section explicitly captures the OFFSET-vs-cursor-pagination pattern as a durable, reusable insight — not left empty or generic",
+        "Recent Changes section references the actual committed fix (the fixture's tree is clean — the fix is already committed), not described as still-uncommitted work",
+        "Status reflects 'needs final review' rather than being marked fully complete or as barely-started in_progress",
+        "Document contains all required headings: Task(s), Recent Changes, Learnings, Chronicle Candidates, Artifacts, Action Items & Next Steps, Other Notes"
+      ]
+    }
+  ]
+}

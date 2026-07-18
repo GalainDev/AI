@@ -1,0 +1,54 @@
+{
+  "expectations": [
+    {
+      "text": "Handoff file exists under .claude/handoffs/<repo>/ with YYYY-MM-DD_HHMM_description.md filename",
+      "passed": true,
+      "evidence": ".claude/handoffs/eval1-with/2026-07-13_0359_rate-limiter-token-bucket.md \u2014 matches pattern exactly."
+    },
+    {
+      "text": "Frontmatter branch field is exactly 'feature/rate-limiter'",
+      "passed": true,
+      "evidence": "branch: feature/rate-limiter in frontmatter."
+    },
+    {
+      "text": "Frontmatter git_commit field matches a real commit hash from fixture history",
+      "passed": true,
+      "evidence": "git_commit: e1d2867 \u2014 verified against actual fixture: `git log --oneline` shows e1d2867 wip: add token bucket skeleton as the real second commit."
+    },
+    {
+      "text": "Contains all required headings",
+      "passed": true,
+      "evidence": "Task(s), Recent Changes, Learnings, Chronicle Candidates, Artifacts, Action Items & Next Steps, Other Notes \u2014 all seven present."
+    },
+    {
+      "text": "Content specifically references rate limiter/token bucket work, not generic",
+      "passed": true,
+      "evidence": "References exact line numbers (rate_limiter.py:8-10), exact method names (_refill, allow), exact TODO comments."
+    },
+    {
+      "text": ".gitignore created containing '.claude/handoffs/'",
+      "passed": true,
+      "evidence": ".gitignore output file contains exactly '.claude/handoffs/'; fixture had no .gitignore before."
+    },
+    {
+      "text": "Final message includes exact file path and /resume-handoff command",
+      "passed": true,
+      "evidence": "FINAL_RESPONSE.md: 'Handoff created: .claude/handoffs/eval1-with/...' + '/resume-handoff .claude/handoffs/eval1-with/...'"
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 0,
+    "total": 7,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "total_tool_calls": 10,
+    "output_chars": null,
+    "transcript_chars": null
+  },
+  "timing": {
+    "executor_duration_seconds": 39.0,
+    "total_duration_seconds": 39.0
+  }
+}

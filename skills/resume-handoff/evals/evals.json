@@ -1,0 +1,40 @@
+{
+  "skill_name": "resume-handoff",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "resume from .claude/handoffs/resume-matches-repo/2026-07-10_1400_token-bucket-plan.md",
+      "expected_output": "Reads the handoff fully, verifies git_commit/branch match current HEAD exactly (they do — state is unchanged), confirms both artifacts (docs/plan.md, src/rate_limiter.py) exist, and proposes next steps drawn directly from the handoff's Action Items (implement refill logic per the plan) before doing any implementation work.",
+      "files": ["evals/fixtures/resume-matches-repo"],
+      "expectations": [
+        "Response explicitly states the recorded git commit/branch matched current state (no divergence)",
+        "Response confirms both artifacts (docs/plan.md, src/rate_limiter.py) were checked and exist",
+        "Proposed next steps are drawn from the handoff's actual Action Items (refill logic, middleware, tests), not invented from scratch",
+        "No implementation was attempted — response stops at presenting the plan for confirmation"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "pick up where I left off — resume the handoff for this project",
+      "expected_output": "No path given but only one handoff exists, so it's located automatically. Crucially: the skill must detect that the recorded git_commit no longer matches current HEAD (a new commit landed since the handoff was written) AND that the referenced artifact docs/notes.md has been deleted — and must flag this divergence explicitly to the user rather than proceeding as if the handoff's state still holds.",
+      "files": ["evals/fixtures/resume-diverged-repo"],
+      "expectations": [
+        "Response explicitly states the current git state has diverged from the recorded git_commit (names or references the mismatch)",
+        "Response explicitly notes that docs/notes.md (the referenced artifact) no longer exists",
+        "Response does not simply proceed with the original plan as if nothing changed — divergence is surfaced as something requiring the user's attention before proceeding",
+        "No implementation was attempted"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "what was I working on in this repo? resume from the handoff",
+      "expected_output": "No path given and TWO handoff files exist for this repo with different timestamps. The skill must not silently guess — it should either list both and ask which one, or clearly identify the most recent (2026-07-09, retry-logic-wip) as the default while still confirming with the user before proceeding, rather than picking one with no acknowledgment that a choice was made.",
+      "files": ["evals/fixtures/resume-multi-repo"],
+      "expectations": [
+        "Response acknowledges that more than one handoff file exists for this repo",
+        "Response either explicitly asks the user which handoff to resume, or clearly states which one it selected and why — it does not silently use one with no acknowledgment a choice was made",
+        "No implementation was attempted"
+      ]
+    }
+  ]
+}

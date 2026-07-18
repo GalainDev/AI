@@ -1,0 +1,14 @@
+{
+  "eval_id": 1,
+  "eval_name": "explicit-ask-mid-task",
+  "prompt": "I need to step away from this for a while — can you write up a handoff so I can pick this back up later? We've been working on the rate limiter and I haven't finished the tests yet.",
+  "assertions": [
+    "A handoff markdown file exists under a .claude/handoffs/<repo>/ path with a YYYY-MM-DD_HHMM_description.md-shaped filename",
+    "Frontmatter branch field is exactly 'feature/rate-limiter'",
+    "Frontmatter git_commit field matches a real commit hash from this fixture's history (not invented)",
+    "Document contains all required headings: Task(s), Recent Changes, Learnings, Chronicle Candidates, Artifacts, Action Items & Next Steps, Other Notes",
+    "Content specifically references the rate limiter / token bucket work, not generic placeholder text",
+    "A .gitignore file was created containing '.claude/handoffs/' since none existed in the fixture before",
+    "The final message to the user includes the exact created file path and the /resume-handoff command to resume it"
+  ]
+}

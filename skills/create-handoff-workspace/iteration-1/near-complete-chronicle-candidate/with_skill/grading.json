@@ -1,0 +1,40 @@
+{
+  "expectations": [
+    {
+      "text": "Chronicle Candidates section captures OFFSET-vs-cursor pattern as durable/reusable",
+      "passed": true,
+      "evidence": "'OFFSET-based pagination drifts when rows are inserted mid-list; cursor/keyset pagination... is the fix. This is a pattern, not a one-off.'"
+    },
+    {
+      "text": "Recent Changes reflects the fix as actually committed (clean tree), not uncommitted WIP",
+      "passed": true,
+      "evidence": "'See commit faa15c0 (fix: switch to cursor-based pagination) for the full diff' \u2014 correctly reflects committed state."
+    },
+    {
+      "text": "Status reflects needs-review nuance, not falsely complete or falsely barely-started",
+      "passed": true,
+      "evidence": "Task(s): 'done, pending final review'. Frontmatter status=in_progress is coarse but body text is precise.",
+      "note": "minor: frontmatter status enum (in_progress|complete) has no dedicated needs-review value \u2014 worth adding in next iteration"
+    },
+    {
+      "text": "Contains all required headings",
+      "passed": true,
+      "evidence": "All 7 present."
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 0,
+    "total": 4,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "total_tool_calls": 9,
+    "output_chars": null,
+    "transcript_chars": null
+  },
+  "timing": {
+    "executor_duration_seconds": 37.2,
+    "total_duration_seconds": 37.2
+  }
+}

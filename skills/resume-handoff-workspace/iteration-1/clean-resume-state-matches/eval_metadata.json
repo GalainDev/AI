@@ -1,0 +1,11 @@
+{
+  "eval_id": 1,
+  "eval_name": "clean-resume-state-matches",
+  "prompt": "resume from .claude/handoffs/resume-matches-repo/2026-07-10_1400_token-bucket-plan.md",
+  "assertions": [
+    "Response explicitly states the recorded git commit/branch matched current state (no divergence)",
+    "Response confirms both artifacts (docs/plan.md, src/rate_limiter.py) were checked and exist",
+    "Proposed next steps are drawn from the handoff's actual Action Items (refill logic, middleware, tests), not invented from scratch",
+    "No implementation was attempted — response stops at presenting the plan for confirmation"
+  ]
+}

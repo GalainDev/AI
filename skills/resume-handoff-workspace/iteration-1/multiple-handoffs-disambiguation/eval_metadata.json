@@ -1,0 +1,10 @@
+{
+  "eval_id": 3,
+  "eval_name": "multiple-handoffs-disambiguation",
+  "prompt": "what was I working on in this repo? resume from the handoff",
+  "assertions": [
+    "Response acknowledges that more than one handoff file exists for this repo",
+    "Response either explicitly asks the user which handoff to resume, or clearly states which one it selected and why — it does not silently use one with no acknowledgment a choice was made",
+    "No implementation was attempted"
+  ]
+}

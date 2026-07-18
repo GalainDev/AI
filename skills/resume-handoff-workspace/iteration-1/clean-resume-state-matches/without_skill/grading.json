@@ -1,0 +1,40 @@
+{
+  "expectations": [
+    {
+      "text": "Explicitly states recorded git commit/branch matched current state",
+      "passed": true,
+      "evidence": "'repo is on branch feature/token-bucket at commit 8514ee6, working tree clean \u2014 matches the handoff exactly, no drift.'",
+      "note": "non-discriminating: baseline performs this check unprompted"
+    },
+    {
+      "text": "Confirms both artifacts checked and exist",
+      "passed": true,
+      "evidence": "Describes both files' current content accurately, implying they were read, though less explicit about the verification framing than with-skill."
+    },
+    {
+      "text": "Next steps drawn from handoff's actual Action Items",
+      "passed": true,
+      "evidence": "Reproduces the same 3 steps."
+    },
+    {
+      "text": "No implementation attempted",
+      "passed": true,
+      "evidence": "'I've confirmed the plan and current state but have not made any code changes.'"
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 0,
+    "total": 4,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "total_tool_calls": 4,
+    "output_chars": null,
+    "transcript_chars": null
+  },
+  "timing": {
+    "executor_duration_seconds": 22.4,
+    "total_duration_seconds": 22.4
+  }
+}

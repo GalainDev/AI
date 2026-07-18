@@ -1,0 +1,39 @@
+{
+  "expectations": [
+    {
+      "text": "Explicitly states recorded git commit/branch matched current state",
+      "passed": true,
+      "evidence": "'Recorded git_commit: 8514ee6 and branch: feature/token-bucket... match the current repo exactly \u2014 git rev-parse --short HEAD returns 8514ee6...'"
+    },
+    {
+      "text": "Confirms both artifacts checked and exist",
+      "passed": true,
+      "evidence": "Explicitly lists both files, states 'read their current contents directly rather than trusting the handoff's description.'"
+    },
+    {
+      "text": "Next steps drawn from handoff's actual Action Items",
+      "passed": true,
+      "evidence": "Reproduces the exact 3-item list from the handoff verbatim."
+    },
+    {
+      "text": "No implementation attempted, stops at proposed plan",
+      "passed": true,
+      "evidence": "Ends with 'Shall I proceed... or would you like to adjust the approach?'"
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 0,
+    "total": 4,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "total_tool_calls": 9,
+    "output_chars": null,
+    "transcript_chars": null
+  },
+  "timing": {
+    "executor_duration_seconds": 32.3,
+    "total_duration_seconds": 32.3
+  }
+}

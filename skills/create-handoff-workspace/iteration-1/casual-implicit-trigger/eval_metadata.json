@@ -1,0 +1,11 @@
+{
+  "eval_id": 2,
+  "eval_name": "casual-implicit-trigger",
+  "prompt": "gonna hop off for lunch, can you jot down where we left off with the rate limiter so I don't lose context",
+  "assertions": [
+    "Despite no explicit 'handoff' keyword in the prompt, a properly formatted handoff document was still produced (not a generic freeform note)",
+    "A handoff markdown file exists under a .claude/handoffs/<repo>/ path with a YYYY-MM-DD_HHMM_description.md-shaped filename",
+    "Document contains all required headings: Task(s), Recent Changes, Learnings, Chronicle Candidates, Artifacts, Action Items & Next Steps, Other Notes",
+    "A .gitignore file was created containing '.claude/handoffs/'"
+  ]
+}

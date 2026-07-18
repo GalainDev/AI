@@ -1,0 +1,288 @@
+{
+  "metadata": {
+    "skill_name": "resume-handoff",
+    "skill_path": "/Users/heman/developer/AI/skills/resume-handoff",
+    "timestamp": "2026-07-12T20:05:51.200260+00:00",
+    "evals_run": [
+      "clean-resume-state-matches",
+      "diverged-state-must-flag",
+      "multiple-handoffs-disambiguation"
+    ],
+    "runs_per_configuration": 1
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "eval_name": "clean-resume-state-matches",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 32.3,
+        "tokens": null,
+        "tool_calls": 9,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Explicitly states recorded git commit/branch matched current state",
+          "passed": true,
+          "evidence": "'Recorded git_commit: 8514ee6 and branch: feature/token-bucket... match the current repo exactly \u2014 git rev-parse --short HEAD returns 8514ee6...'"
+        },
+        {
+          "text": "Confirms both artifacts checked and exist",
+          "passed": true,
+          "evidence": "Explicitly lists both files, states 'read their current contents directly rather than trusting the handoff's description.'"
+        },
+        {
+          "text": "Next steps drawn from handoff's actual Action Items",
+          "passed": true,
+          "evidence": "Reproduces the exact 3-item list from the handoff verbatim."
+        },
+        {
+          "text": "No implementation attempted, stops at proposed plan",
+          "passed": true,
+          "evidence": "Ends with 'Shall I proceed... or would you like to adjust the approach?'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "clean-resume-state-matches",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 22.4,
+        "tokens": null,
+        "tool_calls": 4,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Explicitly states recorded git commit/branch matched current state",
+          "passed": true,
+          "evidence": "'repo is on branch feature/token-bucket at commit 8514ee6, working tree clean \u2014 matches the handoff exactly, no drift.'",
+          "note": "non-discriminating: baseline performs this check unprompted"
+        },
+        {
+          "text": "Confirms both artifacts checked and exist",
+          "passed": true,
+          "evidence": "Describes both files' current content accurately, implying they were read, though less explicit about the verification framing than with-skill."
+        },
+        {
+          "text": "Next steps drawn from handoff's actual Action Items",
+          "passed": true,
+          "evidence": "Reproduces the same 3 steps."
+        },
+        {
+          "text": "No implementation attempted",
+          "passed": true,
+          "evidence": "'I've confirmed the plan and current state but have not made any code changes.'"
+        }
+      ],
+      "notes": [
+        "non-discriminating: baseline performs this check unprompted"
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "diverged-state-must-flag",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 41.0,
+        "tokens": null,
+        "tool_calls": 9,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Explicitly states current git state has diverged, references the mismatch",
+          "passed": true,
+          "evidence": "'Git state has diverged... Recorded: git_commit: 332ce7e... Current: HEAD is cba44d2... 1 commit ahead' plus git log/git show evidence cited."
+        },
+        {
+          "text": "Explicitly notes docs/notes.md no longer exists",
+          "passed": true,
+          "evidence": "'The handoff's only listed artifact, docs/notes.md, no longer exists... confirmed via ls/find... and via the commit diff.'"
+        },
+        {
+          "text": "Does not proceed with original plan as-is; surfaces divergence before acting",
+          "passed": true,
+          "evidence": "Adjusts the plan, explicitly flags the 'notes folded in' commit message as unverified/suspicious, asks before proceeding."
+        },
+        {
+          "text": "No implementation attempted",
+          "passed": true,
+          "evidence": "'Shall I proceed with rewriting src/pagination.py... or would you like to adjust the approach first?'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "diverged-state-must-flag",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 49.8,
+        "tokens": null,
+        "tool_calls": 7,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Explicitly states current git state has diverged, references the mismatch",
+          "passed": true,
+          "evidence": "'Found a handoff, but it's stale relative to the repo's current state \u2014 flagging before doing anything else.' Includes a git log graph.",
+          "note": "non-discriminating: this capable baseline independently performed thorough git archaeology"
+        },
+        {
+          "text": "Explicitly notes docs/notes.md no longer exists",
+          "passed": true,
+          "evidence": "'It deletes docs/notes.md \u2014 the root-cause writeup the handoff explicitly names... That file no longer exists anywhere.'"
+        },
+        {
+          "text": "Does not proceed with original plan as-is; surfaces divergence before acting",
+          "passed": true,
+          "evidence": "'I don't want to guess and start rewriting pagination.py... I stopped here without making any changes.'"
+        },
+        {
+          "text": "No implementation attempted",
+          "passed": true,
+          "evidence": "Confirmed no code changes; ends with a clarifying question."
+        }
+      ],
+      "notes": [
+        "non-discriminating: this capable baseline independently performed thorough git archaeology"
+      ]
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "multiple-handoffs-disambiguation",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "time_seconds": 45.4,
+        "tokens": null,
+        "tool_calls": 11,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Acknowledges more than one handoff file exists",
+          "passed": true,
+          "evidence": "'I found two handoff files for this repo... I want to confirm which one you want to resume from.'"
+        },
+        {
+          "text": "Explicitly asks user which, or clearly states selection and reasoning (not silent)",
+          "passed": true,
+          "evidence": "Explicitly ASKS: 'Which handoff should I resume from \u2014 the 2026-07-09 retry-logic one... or the 2026-07-05 queue-skeleton one?' \u2014 the more cautious of the two acceptable behaviors, matches SKILL.md's stated preference to confirm rather than assume."
+        },
+        {
+          "text": "No implementation attempted",
+          "passed": true,
+          "evidence": "Ends on the disambiguating question; no code touched."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "multiple-handoffs-disambiguation",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "time_seconds": 27.4,
+        "tokens": null,
+        "tool_calls": 7,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Acknowledges more than one handoff file exists",
+          "passed": true,
+          "evidence": "'There are two handoffs for this repo...'"
+        },
+        {
+          "text": "Explicitly asks user which, or clearly states selection and reasoning (not silent)",
+          "passed": true,
+          "evidence": "Did NOT ask \u2014 silently decided to use the newer handoff and proceeded to present a plan based on that choice, but DID clearly state which one and why ('I used the newer one... with the older one only for background'), satisfying the assertion's OR clause.",
+          "note": "QUALITATIVE GAP not captured by this assertion's wording: with-skill run asks before proceeding (more cautious/correct per SKILL.md intent); baseline decides-and-proceeds. Both technically pass because the assertion accepts either behavior \u2014 tighten to require explicit asking if this distinction should be enforced."
+        },
+        {
+          "text": "No implementation attempted",
+          "passed": true,
+          "evidence": "Proposed next steps but did not implement them."
+        }
+      ],
+      "notes": [
+        "QUALITATIVE GAP not captured by this assertion's wording: with-skill run asks before proceeding (more cautious/correct per SKILL.md intent); baseline decides-and-proceeds. Both technically pass because the assertion accepts either behavior \u2014 tighten to require explicit asking if this distinction should be enforced."
+      ]
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 39.5667,
+        "stddev": 6.6666,
+        "min": 32.3,
+        "max": 45.4
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 33.2,
+        "stddev": 14.5918,
+        "min": 22.4,
+        "max": 49.8
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.00",
+      "time_seconds": "+6.4"
+    }
+  },
+  "notes": [
+    "IMPORTANT: zero discrimination on the current assertion set \u2014 with_skill 11/11 vs without_skill 11/11, tied on every eval.",
+    "The baseline subagent (a capable general-purpose agent given the same prompt) independently performed git-state verification, artifact-existence checks, and divergence-flagging without being told to \u2014 these behaviors are not unique to the skill for a strong underlying model.",
+    "A real but currently unmeasured quality gap exists in eval 3 (multiple-handoffs-disambiguation): the with_skill run explicitly ASKED the user which handoff to resume before proceeding; the baseline silently DECIDED and proceeded to present a plan (while stating its reasoning). The current assertion's OR-clause ('asks OR clearly states selection') accepts both behaviors, masking this difference. Tightening this assertion to require explicit asking would likely restore discrimination on eval 3.",
+    "Recommendation before calling resume-handoff done: either (a) tighten assertions to capture the ask-vs-assume distinction and any other qualitative gaps visible in the transcripts but not asserted, or (b) accept that for capable models this skill's value is consistency/reliability rather than unlocking new capability, which is still a legitimate reason to keep it, but should be a conscious call rather than an assumption."
+  ]
+}

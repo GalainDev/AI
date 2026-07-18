@@ -1,0 +1,40 @@
+{
+  "expectations": [
+    {
+      "text": "Chronicle Candidates-equivalent pattern capture present and durable-framed",
+      "passed": true,
+      "evidence": "Baseline has its own '## Pattern worth remembering (not just a one-off fix)' section, arguably as well-written as the with-skill version.",
+      "note": "non-discriminating on this eval: prompt was explicit enough that baseline matched content quality"
+    },
+    {
+      "text": "Recent Changes reflects the fix as actually committed, not uncommitted WIP",
+      "passed": true,
+      "evidence": "'Fix is implemented and committed. Considered basically done.' correctly references faa15c0."
+    },
+    {
+      "text": "Status reflects needs-review nuance",
+      "passed": true,
+      "evidence": "'**Status:** Code complete, needs final review before merge' \u2014 actually more explicit than the with-skill run's frontmatter enum."
+    },
+    {
+      "text": "Contains all required headings",
+      "passed": false,
+      "evidence": "Own headings (Summary, What changed, State/what's left, Pattern worth remembering, Suggested next steps) \u2014 none of the 7 required."
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 1,
+    "total": 4,
+    "pass_rate": 0.75
+  },
+  "execution_metrics": {
+    "total_tool_calls": 7,
+    "output_chars": null,
+    "transcript_chars": null
+  },
+  "timing": {
+    "executor_duration_seconds": 48.3,
+    "total_duration_seconds": 48.3
+  }
+}

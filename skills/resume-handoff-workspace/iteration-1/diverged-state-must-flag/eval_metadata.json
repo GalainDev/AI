@@ -1,0 +1,11 @@
+{
+  "eval_id": 2,
+  "eval_name": "diverged-state-must-flag",
+  "prompt": "pick up where I left off — resume the handoff for this project",
+  "assertions": [
+    "Response explicitly states the current git state has diverged from the recorded git_commit (names or references the mismatch)",
+    "Response explicitly notes that docs/notes.md (the referenced artifact) no longer exists",
+    "Response does not simply proceed with the original plan as if nothing changed — divergence is surfaced as something requiring the user's attention before proceeding",
+    "No implementation was attempted"
+  ]
+}
