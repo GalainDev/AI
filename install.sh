@@ -45,7 +45,12 @@ echo "Installing AI harness from: $HARNESS_DIR"
 echo ""
 
 # ── Skills: Claude Code + Codex ────────────────────────────────────────────
+# Only link directories that actually contain a SKILL.md — skill-creator's
+# eval loop leaves sibling "<skill>-workspace/" directories (fixtures,
+# grading, benchmarks) next to each skill, and those must NOT be installed
+# as if they were skills themselves.
 for skill_dir in "$HARNESS_DIR/skills"/*/; do
+  [[ -f "$skill_dir/SKILL.md" ]] || continue
   skill_name=$(basename "$skill_dir")
   link "$skill_dir" "$HOME/.claude/skills/$skill_name"
   link "$skill_dir" "$HOME/.codex/skills/$skill_name"
@@ -66,6 +71,7 @@ echo "════════════════════════�
 echo "  Harness installed."
 echo "  Skills:"
 for skill_dir in "$HARNESS_DIR/skills"/*/; do
+  [[ -f "$skill_dir/SKILL.md" ]] || continue
   echo "    - $(basename "$skill_dir")"
 done
 echo "════════════════════════════════════════"
