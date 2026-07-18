@@ -62,6 +62,35 @@ custom systems last. Every external import gets a security audit before install
 
 ## Phase 3 — OKF knowledge memory  *(custom system #1)*
 
+Decision 2026-07-19: confirmed build order is git-commit skill → **Chronicle next,
+ahead of Pebbles** (repo renamed from working title "OKF" — see naming decision
+above). No dependency blocks this: Chronicle stands alone (the task→knowledge flow
+only matters once both exist), and it's the lower-risk build (markdown/frontmatter,
+no DB engine) vs. Pebbles' real engineering lift (Go + embedded Dolt). Also gives us
+somewhere to durably record decisions made during this project itself.
+
+**Spec convention adopted from OpenSpec** (github.com/Fission-AI/OpenSpec, researched
+not installed — a documentation pattern, not code, so no audit needed): specs use
+delta sections (`ADDED Requirements` / `MODIFIED Requirements`) instead of being
+rewritten in place, plus explicit proposed/active/archived lifecycle states. Applies
+to pebbles/spec.md and future spec docs going forward — NOT a tool adoption, we keep
+doing spec-driven development exactly as we have been, just borrowing this one idea.
+
+**Pebbles/OpenSpec-convention/Chronicle boundary** (2026-07-19 — flagged as real
+crossover risk, resolved same way as the Pebbles/Chronicle split above): without a
+rule, ROADMAP.md, per-repo spec docs, and Pebbles issues could all drift into
+claiming to be "the plan" for the same work. The rule:
+- **Spec docs** (delta-tracked, per-repo, e.g. `pebbles/spec.md`) = WHAT to build —
+  requirements/behavior for a feature, evolved via ADDED/MODIFIED sections.
+- **Pebbles issues** = the WORK to build against a spec. Reference it by name: never
+  restate its content.
+- **Chronicle notes** = durable decisions/rationale that outlive a single spec — e.g.
+  *why* Dolt over SQLite. When a spec's change is fully applied (OpenSpec "archived")
+  and contains lasting rationale, that rationale graduates into a Chronicle decision
+  note — same one-directional graduation as Pebbles → Chronicle.
+- **ROADMAP.md** = top-level cross-repo narrative and phase sequencing ONLY. No
+  feature-level requirement detail — that belongs in each repo's own spec doc.
+
 - [ ] `memory/` as an Open Knowledge Format bundle: markdown + YAML frontmatter
   (`type` required), relationships as wiki-style cross-links, `index.md` per dir
   for progressive disclosure. No runtime, no DB — the graph IS the link structure.
