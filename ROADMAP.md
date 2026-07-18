@@ -31,8 +31,15 @@ custom systems last. Every external import gets a security audit before install
 
 ## Phase 2 — Skills + browser tooling  *(easy wins #2–4)*
 
-- [ ] Rewrite the keepers small and sharp (no over-triggering descriptions, no overlap):
-  `git-commit`, `verify`, `secrets` (.env.schema + varlock runtime injection — audit
+- [x] `git-commit` — shipped 2026-07-19. Rebuilt from HumanLayer's `ci_commit.md`
+  (audited, not adopted wholesale — same pattern as beads/Pebbles etc.): Conventional
+  Commits format, explicit `git add <files>` never `-A`, no AI attribution, executes
+  once invoked rather than pausing again for approval. Lighter eval pass (3 with-skill
+  vs. baseline test-case pairs against throwaway git fixtures, no browser viewer) —
+  caught and fixed a real over-splitting bug where trivial whitespace-only edits were
+  getting their own commit instead of folding into the nearest substantive one.
+- [ ] Rewrite the remaining keepers small and sharp (no over-triggering descriptions,
+  no overlap): `verify`, `secrets` (.env.schema + varlock runtime injection — audit
   varlock first; Secure Enclave local encryption, `keychain()` plugin for Keychain storage),
   `frontend-design`, `go-backend`, `debug`.
 - [ ] Audit + import external skill packs: HumanLayer skills, Google's modern-web
